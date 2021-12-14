@@ -53,8 +53,8 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                 <div class="col-sm-12 col-md-7">
-                                    <button class="btn btn-outline-info mr-3" type="submit">Save as draft</button>
-                                    <button class="btn btn-primary" type="submit">Publish</button>
+                                    <button class="btn btn-outline-info mr-3" type="submit" name="draft">Save as draft</button>
+                                    <button class="btn btn-primary" type="submit" name="publish">Publish</button>
                                 </div>
                             </div>
                         </div>

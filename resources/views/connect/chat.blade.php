@@ -131,7 +131,7 @@
             <div class="col-12 col-sm-6 col-lg-8">
                 <div class="card chat-box" id="mychatbox">
                     <div class="card-header">
-                        <h4>Chat with {{ $receiver->full_name }}</h4>
+                       <a href="{{ route('user.connect') }}">Go to group chat</a> <h4>Chat with {{ $receiver->full_name }}</h4>
                     </div>
                     <div class="card-body chat-content">
                         <div class="card-body chat-care">

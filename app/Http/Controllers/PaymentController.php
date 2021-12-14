@@ -17,6 +17,14 @@ class PaymentController extends Controller
         return view('due.index', compact('title', 'types'));
     }
 
+    public function transaction(){
+
+        $title = "Transactions";
+        $transactions = Payment::paginate(10);
+        return view('transaction.index', compact('title', 'transactions'));
+
+    }
+
     public function pay(Request $request)
     {
         $payment = new Payment;

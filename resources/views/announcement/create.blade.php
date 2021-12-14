@@ -11,44 +11,24 @@
             <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Discussion Thread Post</h4>
+                        <h4>Create new Announcement</h4>
                     </div>
-                    <form action="{{ route('user.discussion.store') }}" method="post">
+                    <form action="{{ route('user.announcement.store') }}" method="post">
                         @csrf
-                        <input type="hidden" name="post_id" value="{{ $discussion->id }}" />
                         <div class="card-body">
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <input type="text" class="form-control" name="title"
-                                        value="{{ $discussion->title }}">
+                                    <input type="text" class="form-control" name="title">
                                     @if ($errors->has('title'))
                                         <small>{!! $errors->get('title')[0] !!}</small>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                                <div class="col-sm-12 col-md-7">
-                                    <select name="category" class="form-control selectric">
-                                        @if ($categories->count())
-                                            @foreach ($categories as $item)
-                                                <option value="{{ $item->id }}" @if ($discussion->category_id == $item->id) selected @endif>
-                                                    {{ $item->name }}</option>
-
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    @if ($errors->has('category'))
-                                        <small>{!! $errors->get('category')[0] !!}</small>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <textarea class="summernote-simple" id="summernote-editor"
-                                        name="content">{{ $discussion->content }}</textarea>
+                                    <textarea class="summernote-simple" id="summernote-editor" name="content"></textarea>
                                     @if ($errors->has('content'))
                                         <small>{!! $errors->get('content')[0] !!}</small>
                                     @endif
@@ -57,7 +37,8 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                 <div class="col-sm-12 col-md-7">
-                                    <button class="btn btn-outline-info mr-3" type="submit" name="draft">Save as draft</button>
+                                    <button class="btn btn-outline-info mr-3" type="submit" name="draft">Save as
+                                        draft</button>
                                     <button class="btn btn-primary" type="submit" name="publish">Publish</button>
                                 </div>
                             </div>

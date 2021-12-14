@@ -7,6 +7,7 @@ use App\Http\Controllers\ConnectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
@@ -48,7 +49,27 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcement');
 
+    Route::get('/announcement/create', [AnnouncementController::class, 'create'])->middleware('admin')->name('announcement.create');
+
+    Route::get('/announcement/edit/{id}', [AnnouncementController::class, 'edit'])->middleware('admin')->name('announcement.edit');
+
+    Route::post('/announcement/store', [AnnouncementController::class, 'store'])->middleware('admin')->name('announcement.store');
+
+    Route::get('/members', [MemberController::class, 'index'])->middleware('admin')->name('member');
+
+    Route::get('/member/status/{id}', [MemberController::class, 'status'])->middleware('admin')->name('member.status');
+
+    Route::get('/member/create', [MemberController::class, 'create'])->middleware('admin')->name('member.create');
+
+    Route::get('/member/edit/{id}', [MemberController::class, 'edit'])->middleware('admin')->name('member.edit');
+
+    Route::post('/member/store', [MemberController::class, 'store'])->middleware('admin')->name('member.store');
+
+    Route::post('/member/update', [MemberController::class, 'update'])->middleware('admin')->name('member.update');
+
     Route::get('/pay-due', [PaymentController::class, 'index'])->name('due');
+
+    Route::get('/transactions', [PaymentController::class, 'transaction'])->middleware('admin')->name('transaction');
 
     Route::get('/cast-vote', [VoteController::class, 'index'])->name('vote');
 

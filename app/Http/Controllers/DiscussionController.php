@@ -23,11 +23,11 @@ class DiscussionController extends Controller
         if ($request->query('category')) {
 
             $category = Category::where('slug', $request->query('category'))->first();
-            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->where('category_id', $category->id)->get();
+            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->where('category_id', $category->id)->paginate(10);
 
         } else {
 
-            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->get();
+            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->paginate(10);
         }
 
         if ($request->query('s')) {
@@ -93,7 +93,7 @@ class DiscussionController extends Controller
         }
 
         $post->content = $request->content;
-        $post->status = 1;
+        $post->status = $request->has('draft') ? 0 : 1;
         if (!$request->has('post_id')) {
             $post->likes = 0;
         }
