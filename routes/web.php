@@ -9,6 +9,7 @@ use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
@@ -67,9 +68,13 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::post('/member/update', [MemberController::class, 'update'])->middleware('admin')->name('member.update');
 
+    Route::post('/members/update', [MemberController::class, 'groupUpdate'])->middleware('admin')->name('member.group.update');
+
     Route::get('/pay-due', [PaymentController::class, 'index'])->name('due');
 
     Route::get('/transactions', [PaymentController::class, 'transaction'])->middleware('admin')->name('transaction');
+
+    Route::get('/system-setting', [SettingController::class, 'index'])->middleware('admin')->name('setting');
 
     Route::get('/cast-vote', [VoteController::class, 'index'])->name('vote');
 
@@ -88,6 +93,8 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
     Route::get('/discussion/{slug}', [DiscussionController::class, 'single'])->name('discussion.single');
 
     Route::get('/create-discussion-thread', [DiscussionController::class, 'create'])->name('discussion.create');
+
+    Route::post('/discussion/update', [DiscussionController::class, 'groupUpdate'])->middleware('admin')->name('discussion.group.update');
 
     Route::post('/discussion-store', [DiscussionController::class, 'store'])->name('discussion.store');
 

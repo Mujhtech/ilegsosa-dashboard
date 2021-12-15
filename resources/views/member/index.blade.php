@@ -36,13 +36,15 @@
                     </div>
                     <div class="card-body">
                         <div class="float-left">
-                            <form>
+                            <form action="{{ route('user.member.group.update') }}" method="post" id="action-form">
+                                @csrf
                                 <input type="hidden" name="selected" id="selected">
-                                <select class="form-control selectric">
+                                <select class="form-control selectric" name="action" id="action-selection">
                                     <option>Action For Selected</option>
-                                    <option>Move to Draft</option>
-                                    <option>Move to Pending</option>
-                                    <option>Delete Pemanently</option>
+                                    <option value="verify">Verify</option>
+                                    <option value="unverify">Unverify</option>
+                                    <option value="unblock">Unblock</option>
+                                    <option value="block">Block</option>
                                 </select>
                             </form>
                         </div>
@@ -67,7 +69,7 @@
                                     <th class="text-center pt-2">
                                         <div class="custom-checkbox custom-checkbox-table custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                                class="custom-control-input" id="checkbox-all">
+                                                class="custom-control-input" id="checkbox-all" onclick="toggle(this);">
                                             <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </th>
@@ -86,8 +88,10 @@
                                             <td>
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        class="custom-control-input filled-in" id="checkbox-{{$item->id}}" name="{{$item->id}}">
-                                                    <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
+                                                        class="custom-control-input filled-in"
+                                                        id="checkbox-{{ $item->id }}" name="{{ $item->id }}">
+                                                    <label for="checkbox-{{ $item->id }}"
+                                                        class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
                                             <td>{{ $item->full_name }}
@@ -148,38 +152,44 @@
 
 @push('js')
     <script>
-
-        function confirmAction(event) {
-
-            var re = confirm('Are you sure you want to perform this action ?');
-            if (re == true) {
-                return true
-            } else {
-                event.preventDefault();
-            }
-        }
+        $("#action-selection").change(function() {
+            var selected = $('#selected').val();
+            if (selected != null && selected != "")
+                $("#action-form").submit();
+        });
 
         $('#selected').val = '';
         $(".filled-in").on('change', function() {
             var favorite = [];
             $.each($("tbody input[type='checkbox']:checked"), function() {
                 favorite.push($(this).attr('name'));
+                console.log(favorite);
             });
             if (favorite.length > 0) {
                 $('#selected').val(favorite);
-            } else {
-            }
+            } else {}
         });
 
 
-        /* function toggle(source) {
-                checkboxes = document.querySelectorAll("input[type='checkbox']");
-                for (var i = 0; i < checkboxes.length; i++) {
-                    if (checkboxes[i] != source)
-                        checkboxes[i].checked = source.checked;
-                    //console.log(checkboxes[i].attr('id'));
+        function toggle(source) {
+            var favorite = [];
+            checkboxes = document.querySelectorAll("tbody input[type='checkbox']");
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+                //
+                if (checkboxes[i].getAttribute('name') != null && source.checked) {
+                    favorite.push(checkboxes[i].getAttribute('name'));
+                } else {
+                    favorite = [];
                 }
             }
-        */
+            if (favorite.length > 0) {
+                $('#selected').val(favorite);
+            } else {
+                $('#selected').val('');
+            }
+            console.log(favorite);
+        }
     </script>
 @endpush

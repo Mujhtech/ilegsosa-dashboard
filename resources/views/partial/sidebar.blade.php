@@ -60,6 +60,12 @@
                 <a href="{{ route('user.profile') }}" class="nav-link"><i class="fa fa-cog"></i>
                     <span>Update Profile</span></a>
             </li>
+            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                <li class="nav-item dropdown  mt-4 {{ Route::is('user.setting') ? 'active' : '' }}">
+                    <a href="{{ route('user.setting') }}" class="nav-link"><i class="fa fa-cog"></i>
+                        <span>System Setting</span></a>
+                </li>
+            @endif
             <li><a class="nav-link  mt-4" href="{{ route('auth.logout') }}"><i class="fa fa-sign-out-alt"></i>
                     <span>Log out</span></a>
             </li>

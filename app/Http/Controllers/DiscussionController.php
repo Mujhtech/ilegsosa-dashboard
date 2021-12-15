@@ -152,4 +152,50 @@ class DiscussionController extends Controller
         return str_replace(' ', '-', strtolower($title)) . '-' . strtolower($randomString);
 
     }
+
+    public function groupUpdate(Request $request)
+    {
+        //
+
+        $selected = explode(',', $request->selected);
+        $discussions = DiscussionThread::whereIn('id', $selected)->get();
+        foreach ($discussions as $discussion) {
+
+            if ($request->action == 'publish') {
+
+                $discussion->status = 1;
+                $discussion->save();
+
+            } elseif ($request->action == 'draft') {
+
+                $discussion->status = 0;
+                $discussion->save();
+
+            } elseif ($request->action == 'pending') {
+
+                $discussion->status = 2;
+                $discussion->save();
+
+            } elseif ($request->action == 'featured') {
+
+                $discussion->featured = 1;
+                $discussion->save();
+
+            } elseif ($request->action == 'most_read') {
+
+                $discussion->most_read = 1;
+                $discussion->save();
+
+            } elseif ($request->action == 'trash') {
+
+                $discussion->delete();
+
+            }
+
+        }
+
+        flash('Discussions updated successfully')->success();
+        return redirect()->back();
+    }
+
 }

@@ -143,6 +143,42 @@ class MemberController extends Controller
         }
     }
 
+    public function groupUpdate(Request $request)
+    {
+        //
+
+        $selected = explode(',', $request->selected);
+        $users = User::whereIn('id', $selected)->get();
+        foreach ($users as $user) {
+
+            if ($request->action == 'verify') {
+
+                $user->verified = 1;
+                $user->save();
+
+            } elseif ($request->action == 'unverify') {
+
+                $user->verified = 0;
+                $user->save();
+
+            } elseif ($request->action == 'block') {
+
+                $user->active = 0;
+                $user->save();
+
+            } elseif ($request->action == 'unblock') {
+
+                $user->active = 1;
+                $user->save();
+
+            }
+
+        }
+
+        flash('Users updated successfully')->success();
+        return redirect()->back();
+    }
+
     public function status($id)
     {
 

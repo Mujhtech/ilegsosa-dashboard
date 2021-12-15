@@ -120,7 +120,7 @@
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">{{ $item->title }}</h5>
                                     </div>
-                                    <p class="mb-1">{{ $item->content }}</p>
+                                    <p class="mb-1">{!! $item->content !!}</p>
                                     <small class="text-muted">{{ $item->created_at->format('d M, Y') }}</small>
                                 </a>
                             @endforeach

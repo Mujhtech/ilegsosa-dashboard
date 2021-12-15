@@ -10,8 +10,9 @@
                         <div class="card-header">
                             <ul class="nav nav-pills">
                                 <div class="card-header-action section-header-button float-right ml-5">
-                                    <a href="{{ route('user.member.create') }}" class="btn btn-primary">+ Add new
-                                        nomination</a>
+                                    <button id="modal-2" data-toggle="modal" data-target="#exampleModal"
+                                        class="btn btn-primary">+ Add new
+                                        nomination</button>
                                 </div>
                                 <div class="card-header-action section-header-button float-right ml-5">
                                     <a href="{{ route('user.member.create') }}" class="btn btn-primary">+ Add new
@@ -21,6 +22,27 @@
                                     <a href="{{ route('user.member.create') }}" class="btn btn-primary">+ Vote Setting</a>
                                 </div>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -40,6 +62,7 @@
                                         <th>Vote</th>
                                         <th>Winner</th>
                                         <th>Year</th>
+                                        <th>Action</th>
                                     </tr>
 
                                     @if ($nominations->count() > 0)
@@ -55,6 +78,7 @@
                                                         <span class="badge badge-info">Pending</span>
                                                     @endif
                                                 </td>
+                                                <td>{{ $item->year }}</td>
                                                 <td>{{ $item->year }}</td>
                                             </tr>
                                         @endforeach
@@ -83,12 +107,14 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>Title</th>
+                                        <th>Action</th>
                                     </tr>
 
                                     @if ($designations->count() > 0)
                                         @foreach ($designations as $item)
                                             <tr>
                                                 <td>{{ $item->title }}</td>
+                                                <td>{{ $item->id }}</td>
                                             </tr>
                                         @endforeach
                                     @else

@@ -40,7 +40,7 @@
     <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
-
+    <script src="{{ asset('js/page/bootstrap-modal.js') }}"></script>
     @stack('js')
 </body>
 
