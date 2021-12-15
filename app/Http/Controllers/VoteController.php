@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Designation;
 use App\Models\Nomination;
+use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,13 @@ class VoteController extends Controller
     {
         $title = "Cast Vote";
         $designations = Designation::with('nominations')->get();
-        return view('vote.index', compact('title', 'designations'));
+
+        if (get_setting('start_election')) {
+            return view('vote.index', compact('title', 'designations'));
+        } else {
+            return view('vote.empty', compact('title', 'designations'));
+        }
+
     }
 
     public function manage(Request $request)
@@ -23,7 +30,8 @@ class VoteController extends Controller
         $title = "Manage Vote/Nomination";
         $designations = Designation::get();
         $nominations = Nomination::paginate(10);
-        return view('vote.manage', compact('title', 'designations', 'nominations'));
+        $users = User::get();
+        return view('vote.manage', compact('title', 'designations', 'nominations', 'users'));
 
     }
 
@@ -68,8 +76,8 @@ class VoteController extends Controller
     {
 
         $no = new Nomination;
-        $no->user_id = $request->user_id;
-        $no->designation_id = $request->designation_id;
+        $no->user_id = $request->nominate;
+        $no->designation_id = $request->designation;
         $no->year = $request->year;
 
         if ($no->save()) {

@@ -76,11 +76,17 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::get('/system-setting', [SettingController::class, 'index'])->middleware('admin')->name('setting');
 
+    Route::post('/system/store', [SettingController::class, 'store'])->middleware('admin')->name('setting.store');
+
     Route::get('/cast-vote', [VoteController::class, 'index'])->name('vote');
 
     Route::get('/manage-nomination', [VoteController::class, 'manage'])->name('vote.manage');
 
     Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
+
+    Route::post('/vote/nominate', [VoteController::class, 'nominate'])->name('vote.nominate');
+
+    Route::post('/vote/designation', [VoteController::class, 'designate'])->name('vote.designate');
 
     Route::get('/connect-with-mates', [ConnectController::class, 'index'])->name('connect');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Storage;
 
 class SettingController extends Controller
 {
@@ -21,69 +22,91 @@ class SettingController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
+        //dd($request->all());
+
+        $setting = Setting::get();
+
+        foreach ($setting as $set) {
+
+            if ($set->type == "site_favicon" && $request->hasFile('site_favicon')) {
+
+                if ($set->value != null && $set->value != "" && Storage::exists($set->value)) {
+
+                    Storage::delete($set->value);
+
+                }
+
+                $logo = Setting::where('type', 'site_favicon')->first();
+                $logo->value = 'public/uploads/favicon/favicon.png';
+                $logo->save();
+
+                $request->file('site_favicon')->storeAs(
+                    'public/uploads/favicon', 'favicon.png'
+                );
+
+            } elseif ($set->type == "site_logo" && $request->hasFile('site_logo')) {
+
+                if ($set->value != null && $set->value != "" && Storage::exists($set->value)) {
+
+                    Storage::delete($set->value);
+
+                }
+
+                $logo = Setting::where('type', 'site_logo')->first();
+                $logo->value = 'public/uploads/logo/logo.png';
+                $logo->save();
+
+                $request->file('site_logo')->storeAs(
+                    'public/uploads/logo', 'logo.png'
+                );
+
+            } elseif ($set->type == "site_background_image" && $request->hasFile('site_background_image')) {
+
+                if ($set->value != null && $set->value != "" && Storage::exists($set->value)) {
+
+                    Storage::delete($set->value);
+
+                }
+
+                $logo = Setting::where('type', 'site_background_image')->first();
+                $logo->value = 'public/uploads/bg/site_background_image.png';
+                $logo->save();
+
+                $request->file('site_background_image')->storeAs(
+                    'public/uploads/bg', 'site_background_image.png'
+                );
+
+            } elseif ($set->type == "new_user_verification" && $request->has($set->type)) {
+
+                $set->value = $request->input('new_user_verification');
+
+                $set->save();
+
+            } elseif ($set->type == "start_election" && $request->has($set->type)) {
+
+                $set->value = $request->input('start_election');
+
+                $set->save();
+
+            } elseif ($request->has($set->type) && $request->input($set->type) != "" && $set->type != "site_logo" && $set->type != "site_favicon") {
+
+                $set->value = $request->input($set->type);
+
+                $set->save();
+
+            } else {
+
+                continue;
+
+            }
+
+        }
+
+        flash('Setting save successfully')->success();
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

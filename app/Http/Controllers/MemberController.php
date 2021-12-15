@@ -40,7 +40,8 @@ class MemberController extends Controller
         //
         $title = 'New Member';
         $roles = Role::get();
-        return view('member.create', compact('title', 'roles'));
+        $users = User::get();
+        return view('member.create', compact('title', 'roles', 'users'));
     }
 
     /**

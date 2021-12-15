@@ -74,7 +74,7 @@ class ConnectController extends Controller
             $member = new SetMember;
             $member->set_id = $request->set_id;
             $member->user_id = $user->id;
-            $member->status = 1;
+            $member->status = get_setting('auto_connect');
 
             if ($member->save() && $user->save()) {
 

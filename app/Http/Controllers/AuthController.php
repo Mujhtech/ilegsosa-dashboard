@@ -10,8 +10,8 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use DB;
-use Str;
 use Illuminate\Http\Request;
+use Str;
 
 class AuthController extends Controller
 {
@@ -63,6 +63,7 @@ class AuthController extends Controller
         $user->set_id = 1;
         $user->role_id = 1;
         $user->password = $request->password;
+        $user->verified = get_setting('new_user_verification') ? 0 : 1;
 
         if ($user->save()) {
 
@@ -160,6 +161,8 @@ class AuthController extends Controller
             'email_code' => $email_code,
             'expires_at' => Carbon::now()->addMinutes(60),
         ]);
+
+        flash('A mail has been sent to you')->success();
 
         $title = "Verify Account";
         return view('auth.verify', compact('title', 'token'));

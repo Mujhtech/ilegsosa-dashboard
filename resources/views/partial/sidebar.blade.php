@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <img src="{{ asset('images/ilegs-logo.png') }}" alt="ILEGSOSA Logo" style="width: 200px;"
+            <img src="{{ get_site_logo() }}" alt="{{ get_setting('site_title') }} Logo" style="width: 200px;"
                 class="mt-3">
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
