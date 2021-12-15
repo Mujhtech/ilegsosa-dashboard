@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         //
-        $announcements = Announcement::take(3)->get();
+        $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
         $title = "Dashboard";
         return view('index', compact('title', 'announcements'));
     }

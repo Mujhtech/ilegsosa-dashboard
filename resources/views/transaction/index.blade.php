@@ -14,7 +14,7 @@
                             <table class="table table-striped">
                                 <tr>
                                     <th>Transaction Type</th>
-                                    <th>Member</th>
+                                    @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)<th>Member</th>@endif
                                     <th>Date</th>
                                     <th>Amount</th>
                                     <th>Payment Status</th>
@@ -24,7 +24,7 @@
                                     @foreach ($transactions as $item)
                                         <tr>
                                             <td>{{ $item->payment_type->name }}</td>
-                                            <td>{{ $item->user->full_name }}</td>
+                                            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)<td>{{ $item->user->full_name }}</td>@endif
                                             <td>{{ $item->updated_at->diffForHumans() }}</td>
                                             <td>
                                                 <span class="badge badge-info">&#x20A6;{{ $item->amount }}</span>

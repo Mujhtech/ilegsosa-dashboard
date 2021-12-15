@@ -78,6 +78,7 @@
                                     <th>Phone Number</th>
                                     <th>Year of matriculation</th>
                                     <th>Year of graduation</th>
+                                    <th>Request Connect Access</th>
                                     <th>Created At</th>
                                     <th>Status</th>
                                 </tr>
@@ -118,6 +119,16 @@
                                             </td>
                                             <td>
                                                 {{ $item->year_of_graduation }}
+                                            </td>
+                                            <td>
+                                                @if (\App\Models\SetMember::where('user_id', $item->id)->exists())
+                                                    @if (\App\Models\SetMember::where('user_id', $item->id)->first()->status == 0)
+                                                        <a href="{{ route('user.member.grant.access', $id) }}"
+                                                            class="btn btn-primary">Grant Access</a>
+                                                    @else
+                                                        Access granted
+                                                    @endif
+                                                @endif
                                             </td>
                                             <td>{{ $item->created_at->diffForHumans() }}</td>
                                             <td>

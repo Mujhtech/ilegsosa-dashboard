@@ -123,4 +123,38 @@ class VoteController extends Controller
 
     }
 
+    public function destroyDesignate(Request $request, $id)
+    {
+
+        foreach (Nomination::where('designation_id', $id)->get() as $nominate) {
+            $nominate->delete();
+        }
+
+        $de = Designation::findOrFail($id);
+
+        if ($de->delete()) {
+            flash('Save successfully')->success();
+            return redirect()->back();
+        } else {
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+        }
+
+    }
+
+    public function destoryNominate(Request $request, $id)
+    {
+
+        $no = Nomination::findOrFail($id);
+
+        if ($no->save()) {
+            flash('Save successfully')->success();
+            return redirect()->back();
+        } else {
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+        }
+
+    }
+
 }

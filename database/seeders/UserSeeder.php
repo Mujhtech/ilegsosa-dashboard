@@ -17,6 +17,16 @@ class UserSeeder extends Seeder
         //
         $datas = [
             [
+                "first_name" => "Ilegsosa",
+                "last_name" => "Ilegsosa",
+                "email" => "support@ilegsosa.org",
+                "phone" => "07060007000",
+                "password" => "12345678",
+                "verified" => 1,
+                "role_id" => 1,
+                "set_id" => 1,
+            ],
+            [
                 "first_name" => "Mujeeb",
                 "last_name" => "Adeoye",
                 "email" => "mujhtech@gmail.com",

@@ -60,8 +60,10 @@
                                             </td>
                                             <td>{{ $item->year }}</td>
                                             <td colspan="2">
-                                                <a href="" class="btn btn-primary btn-sm">Declare Winner</a>
-                                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                                <a href="{{ route('user.vote.declare', $item->id) }}"
+                                                    class="btn btn-primary btn-sm">Declare Winner</a>
+                                                <a href="{{ route('user.vote.destroy.nominate', $item->id) }}"
+                                                    class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -87,6 +89,8 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <p>Note: Delete any designation record will leads to delete all nomination records belong to the
+                                particular designation</p>
                             <table class="table table-striped">
                                 <tr>
                                     <th>Title</th>
@@ -97,7 +101,8 @@
                                     @foreach ($designations as $item)
                                         <tr>
                                             <td>{{ $item->title }}</td>
-                                            <td><a href="" class="btn btn-danger">Delete</a></td>
+                                            <td><a href="{{ route('user.vote.destroy.designate', $item->id) }}"
+                                                    class="btn btn-danger">Delete</a></td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -254,8 +259,8 @@
                             <div class="col-sm-12 col-md-7">
                                 <select name="start_election" class="form-control selectric" required>
 
-                                    <option value="1" @if(get_setting('start_election') == 1) selected @endif>Enable</option>
-                                    <option value="0" @if(get_setting('start_election') == 0) selected @endif>Disable</option>
+                                    <option value="1" @if (get_setting('start_election') == 1) selected @endif>Enable</option>
+                                    <option value="0" @if (get_setting('start_election') == 0) selected @endif>Disable</option>
 
 
                                 </select>

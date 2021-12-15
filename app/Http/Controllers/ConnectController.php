@@ -50,7 +50,7 @@ class ConnectController extends Controller
 
             }
 
-            $data['members'] = $members->where('user_id', '!=', $request->user()->id)->get();
+            $data['members'] = $members->where('user_id', '!=', $request->user()->id)->orderBy('created_at', 'DESC')->get();
 
             return view('connect.chat', $data);
 
@@ -58,7 +58,7 @@ class ConnectController extends Controller
 
         $data['sets'] = Set::with(['members' => function ($q) {
             $q->where('status', 1);
-        }])->where('status', 1)->get();
+        }])->where('status', 1)->orderBy('created_at', 'DESC')->get();
         return view('connect.index', $data);
 
     }

@@ -56,6 +56,8 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::post('/announcement/store', [AnnouncementController::class, 'store'])->middleware('admin')->name('announcement.store');
 
+    Route::post('/announcement/update', [AnnouncementController::class, 'groupUpdate'])->middleware('admin')->name('announcement.group.update');
+
     Route::get('/members', [MemberController::class, 'index'])->middleware('admin')->name('member');
 
     Route::get('/member/status/{id}', [MemberController::class, 'status'])->middleware('admin')->name('member.status');
@@ -63,6 +65,8 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
     Route::get('/member/create', [MemberController::class, 'create'])->middleware('admin')->name('member.create');
 
     Route::get('/member/edit/{id}', [MemberController::class, 'edit'])->middleware('admin')->name('member.edit');
+
+    Route::get('/member/grant-access/{id}', [MemberController::class, 'grantAccess'])->middleware('admin')->name('member.grant.access');
 
     Route::post('/member/store', [MemberController::class, 'store'])->middleware('admin')->name('member.store');
 
@@ -72,7 +76,7 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::get('/pay-due', [PaymentController::class, 'index'])->name('due');
 
-    Route::get('/transactions', [PaymentController::class, 'transaction'])->middleware('admin')->name('transaction');
+    Route::get('/transactions', [PaymentController::class, 'transaction'])->name('transaction');
 
     Route::get('/system-setting', [SettingController::class, 'index'])->middleware('admin')->name('setting');
 
@@ -87,6 +91,12 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
     Route::post('/vote/nominate', [VoteController::class, 'nominate'])->name('vote.nominate');
 
     Route::post('/vote/designation', [VoteController::class, 'designate'])->name('vote.designate');
+
+    Route::get('/vote/declare/winner/{id}', [VoteController::class, 'declareWinner'])->name('vote.declare');
+
+    Route::get('/vote/destory/designate/{id}', [VoteController::class, 'destroyDesignate'])->name('vote.destroy.designate');
+
+    Route::get('/vote/destory/nominate/{id}', [VoteController::class, 'destoryNominate'])->name('vote.destroy.nominate');
 
     Route::get('/connect-with-mates', [ConnectController::class, 'index'])->name('connect');
 

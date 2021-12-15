@@ -22,9 +22,9 @@ class MemberController extends Controller
 
         if ($request->query('s')) {
             $data['keyword'] = $request->query('s');
-            $data['members'] = User::whereFullName($request->query('s'))->paginate(10);
+            $data['members'] = User::whereFullName($request->query('s'))->orderBy('created_at', 'DESC')->paginate(10);
         } else {
-            $data['members'] = User::paginate(10);
+            $data['members'] = User::orderBy('created_at', 'DESC')->paginate(10);
         }
 
         return view('member.index', $data);
@@ -39,8 +39,8 @@ class MemberController extends Controller
     {
         //
         $title = 'New Member';
-        $roles = Role::get();
-        $users = User::get();
+        $roles = Role::orderBy('created_at', 'DESC')->get();
+        $users = User::orderBy('created_at', 'DESC')->get();
         return view('member.create', compact('title', 'roles', 'users'));
     }
 
@@ -199,6 +199,28 @@ class MemberController extends Controller
             return redirect()->back();
 
         }
+    }
+
+    public function grantAccess($id)
+    {
+
+        $member = SetMember::where('user_id', $id)->first();
+
+        $member->status = 1;
+
+        if ($member->save()) {
+
+            flash('Access granted successfully')->success();
+
+            return redirect()->back();
+
+        } else {
+
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+
+        }
+
     }
 
 }
