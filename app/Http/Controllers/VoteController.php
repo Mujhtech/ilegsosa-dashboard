@@ -17,6 +17,16 @@ class VoteController extends Controller
         return view('vote.index', compact('title', 'designations'));
     }
 
+    public function manage(Request $request)
+    {
+
+        $title = "Manage Vote/Nomination";
+        $designations = Designation::get();
+        $nominations = Nomination::paginate(10);
+        return view('vote.manage', compact('title', 'designations', 'nominations'));
+
+    }
+
     public function store(Request $request)
     {
         //dd($request->all());
@@ -51,6 +61,57 @@ class VoteController extends Controller
 
         flash('Voted successfully')->success();
         return redirect()->back();
+
+    }
+
+    public function nominate(Request $request)
+    {
+
+        $no = new Nomination;
+        $no->user_id = $request->user_id;
+        $no->designation_id = $request->designation_id;
+        $no->year = $request->year;
+
+        if ($no->save()) {
+            flash('Save successfully')->success();
+            return redirect()->back();
+        } else {
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+        }
+
+    }
+
+    public function designate(Request $request)
+    {
+
+        $de = new Designation;
+        $de->title = $request->title;
+        $de->status = 1;
+
+        if ($de->save()) {
+            flash('Save successfully')->success();
+            return redirect()->back();
+        } else {
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+        }
+
+    }
+
+    public function declareWinner(Request $request, $id)
+    {
+
+        $no = Nomination::findOrFail($id);
+        $no->win = 1;
+
+        if ($no->save()) {
+            flash('Save successfully')->success();
+            return redirect()->back();
+        } else {
+            flash('Something went wrong, try again later')->success();
+            return redirect()->back();
+        }
 
     }
 

@@ -15,7 +15,7 @@
                                         <div class="text-primary">{{ $discussion->created_at->format('d M Y') }}</div>
                                     </div>
                                     <div class="media-title mb-1">{{ $discussion->user->full_name }}</div>
-                                    <div class="text-info">Business Executive</div>
+                                    <div class="text-info">{{ $discussion->user->role->name }}</div>
                                     <h6 class="text-primary mt-4">{{ $title }}</h6>
                                     <div class="media-description text-muted mt-4">{!! $discussion->content !!}</div>
                                 </div>
@@ -81,7 +81,7 @@
             </div>
 
 
-            <div class="col-12 col-sm-12 col-lg-8">
+            <div class="col-12 col-sm-12 col-lg-8" id="comment">
                 <div class="card">
                     <div class="card-header">
                         <h4>{{ $discussion->comments()->count() }} Comments</h4>

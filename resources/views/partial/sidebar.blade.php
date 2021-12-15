@@ -50,8 +50,8 @@
                         Vote</span></a>
             </li>
             @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                <li class="nav-item dropdown mt-4 {{ Route::is('user.vote') ? 'active' : '' }}">
-                    <a href="{{ route('user.vote') }}" class="nav-link"><i
+                <li class="nav-item dropdown mt-4 {{ Route::is('user.vote.manage') ? 'active' : '' }}">
+                    <a href="{{ route('user.vote.manage') }}" class="nav-link"><i
                             class="far fa-chart-bar"></i><span>Manage Vote/Nomination</span></a>
                 </li>
             @endif

@@ -57,7 +57,8 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                 <div class="col-sm-12 col-md-7">
-                                    <button class="btn btn-outline-info mr-3" type="submit" name="draft">Save as draft</button>
+                                    <button class="btn btn-outline-info mr-3" type="submit" name="draft">Save as
+                                        draft</button>
                                     <button class="btn btn-primary" type="submit" name="publish">Publish</button>
                                 </div>
                             </div>
@@ -76,39 +77,41 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p class="mb-1 text-primary">Please read this rules before you start posting on the
-                                        discussion thread</p>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p class="mb-1">Our Constitution</p>
-                                </div>
-                            </a>
+                            @if ($most_reads->count() > 0)
+                                @foreach ($most_reads as $item)
+                                    <a href="{{ route('user.discussion.single', $item->slug) }}"
+                                        class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <p class="mb-1 text-primary">{{ $item->title }}</p>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            @else
+                                No discussion found
+                            @endif
                         </div>
-                        <div class="card-header mt-3">
-                            <h4>Featured links</h4>
-                        </div>
+                    </div>
+
+                    <div class="card-header mt-3">
+                        <h4>Featured links</h4>
+                    </div>
+                    <div class="card-body">
 
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p class="mb-1">Class of ’15 Reunion</p>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p class="mb-1">Quick response to Dr. Bolupe Awe’s letter by the national
-                                        president Ilegsosa, Dr. Obi Daramola.</p>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p class="mb-1">Re: Appeal to Governor Oyetola by Dr Bolupe Awe.</p>
-                                </div>
-                            </a>
+
+                            @if ($featureds->count() > 0)
+                                @foreach ($featureds as $item)
+                                    <a href="{{ route('user.discussion.single', $item->slug) }}"
+                                        class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <p class="mb-1">{{ $item->title }}</p>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            @else
+                                No discussion found
+                            @endif
+
                         </div>
                     </div>
                 </div>

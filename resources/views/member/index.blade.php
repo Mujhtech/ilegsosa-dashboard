@@ -36,17 +36,21 @@
                     </div>
                     <div class="card-body">
                         <div class="float-left">
-                            <select class="form-control selectric">
-                                <option>Action For Selected</option>
-                                <option>Move to Draft</option>
-                                <option>Move to Pending</option>
-                                <option>Delete Pemanently</option>
-                            </select>
+                            <form>
+                                <input type="hidden" name="selected" id="selected">
+                                <select class="form-control selectric">
+                                    <option>Action For Selected</option>
+                                    <option>Move to Draft</option>
+                                    <option>Move to Pending</option>
+                                    <option>Delete Pemanently</option>
+                                </select>
+                            </form>
                         </div>
                         <div class="float-right">
-                            <form action="{{ route('user.discussion.index') }}">
+                            <form action="{{ route('user.member') }}">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="s" placeholder="Search">
+                                    <input type="text" class="form-control" name="s"
+                                        value="{{ isset($keyword) ? $keyword : '' }}" placeholder="Search">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit"><i
                                                 class="fas fa-search"></i></button>
@@ -82,7 +86,7 @@
                                             <td>
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        class="custom-control-input" id="checkbox-2">
+                                                        class="custom-control-input filled-in" id="checkbox-{{$item->id}}" name="{{$item->id}}">
                                                     <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
@@ -91,9 +95,11 @@
                                                     <a href="{{ route('user.member.edit', $item->id) }}">Edit</a>
                                                     <div class="bullet"></div>
                                                     @if ($item->active)
-                                                        <a href="{{ route('user.member.status', $item->id) }}" class="text-danger">Block</a>
+                                                        <a href="{{ route('user.member.status', $item->id) }}"
+                                                            class="text-danger">Block</a>
                                                     @else
-                                                        <a href="{{ route('user.member.status', $item->id) }}" class="text-danger">Unblock</a>
+                                                        <a href="{{ route('user.member.status', $item->id) }}"
+                                                            class="text-danger">Unblock</a>
                                                     @endif
                                                 </div>
                                             </td>
@@ -126,33 +132,11 @@
                                 @endif
                             </table>
                         </div>
-                        <div class="float-right">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        @if ($members->count() > 0)
+                            <div class="float-right">
+                                {{ $members->links('vendor.pagination.default') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -161,3 +145,41 @@
 
 
 @endsection
+
+@push('js')
+    <script>
+
+        function confirmAction(event) {
+
+            var re = confirm('Are you sure you want to perform this action ?');
+            if (re == true) {
+                return true
+            } else {
+                event.preventDefault();
+            }
+        }
+
+        $('#selected').val = '';
+        $(".filled-in").on('change', function() {
+            var favorite = [];
+            $.each($("tbody input[type='checkbox']:checked"), function() {
+                favorite.push($(this).attr('name'));
+            });
+            if (favorite.length > 0) {
+                $('#selected').val(favorite);
+            } else {
+            }
+        });
+
+
+        /* function toggle(source) {
+                checkboxes = document.querySelectorAll("input[type='checkbox']");
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i] != source)
+                        checkboxes[i].checked = source.checked;
+                    //console.log(checkboxes[i].attr('id'));
+                }
+            }
+        */
+    </script>
+@endpush

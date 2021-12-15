@@ -60,5 +60,11 @@
 
     @endif
 
+    @if ($announcements->count() > 0)
+        <div class="float-right">
+            {{ $announcements->links('vendor.pagination.default') }}
+        </div>
+    @endif
+
 
 @endsection

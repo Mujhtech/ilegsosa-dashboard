@@ -30,8 +30,8 @@
 
 
             <div class="col-12 col-sm-12 col-lg-8">
-                @if ($disucssions->count() > 0)
-                    @foreach ($disucssions as $item)
+                @if ($discussions->count() > 0)
+                    @foreach ($discussions as $item)
                         <div class="card">
                             <a href="{{ route('user.discussion.single', $item->slug) }}">
                                 <div class="card-body">
@@ -45,7 +45,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="media-title mb-1">{{ $item->user->full_name }}</div>
-                                                <div class="text-info">NATIONAL PRESIDENT</div>
+                                                <div class="text-info">{{ $item->user->role->name }}</div>
                                                 <div class="text-primary mt-4">{{ $item->title }}
                                                 </div>
                                                 <div class="media-description text-muted">{!! $item->content !!}</div>
@@ -53,15 +53,20 @@
                                         </li>
                                     </ul>
                                     <div class="float-right mt-sm-0 mt-3">
-                                        <a href="#" class="btn"><i class="far fa-thumbs-up">
+                                        <a href="{{ route('user.like.store', ['type' => 'post', 'id' => $item->id]) }}" class="btn"><i class="far fa-thumbs-up">
                                                 {{ $item->likes }}</i></a>
-                                        <a href="#" class="btn"><i class="far fa-comment">
+                                        <a href="{{ route('user.discussion.single', $item->slug) }}#comment" class="btn"><i class="far fa-comment">
                                                 {{ $item->comments()->count() }}</i></a>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     @endforeach
+                @endif
+                @if ($discussions->count() > 0)
+                    <div class="float-right">
+                        {{ $discussions->links('vendor.pagination.default') }}
+                    </div>
                 @endif
             </div>
 
@@ -109,6 +114,7 @@
                             @else
                                 No discussion found
                             @endif
+
                         </div>
                     </div>
                 </div>
@@ -170,7 +176,8 @@
                                             <td>
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        class="custom-control-input" id="checkbox-2">
+                                                        class="custom-control-input filled-in"
+                                                        id="checkbox-{{ $item->id }}" name="{{ $item->id }}">
                                                     <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
@@ -204,33 +211,11 @@
                                 @endif
                             </table>
                         </div>
-                        <div class="float-right">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        @if ($my_posts->count() > 0)
+                            <div class="float-right">
+                                {{ $my_posts->links() }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

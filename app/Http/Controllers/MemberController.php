@@ -15,13 +15,19 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $title = 'Members';
-        $members = User::paginate(10);
+        $data['title'] = 'Members';
 
-        return view('member.index', compact('title', 'members'));
+        if ($request->query('s')) {
+            $data['keyword'] = $request->query('s');
+            $data['members'] = User::whereFullName($request->query('s'))->paginate(10);
+        } else {
+            $data['members'] = User::paginate(10);
+        }
+
+        return view('member.index', $data);
     }
 
     /**

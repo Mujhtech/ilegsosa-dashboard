@@ -73,6 +73,8 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
 
     Route::get('/cast-vote', [VoteController::class, 'index'])->name('vote');
 
+    Route::get('/manage-nomination', [VoteController::class, 'manage'])->name('vote.manage');
+
     Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
 
     Route::get('/connect-with-mates', [ConnectController::class, 'index'])->name('connect');

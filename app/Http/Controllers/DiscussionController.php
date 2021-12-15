@@ -23,23 +23,33 @@ class DiscussionController extends Controller
         if ($request->query('category')) {
 
             $category = Category::where('slug', $request->query('category'))->first();
-            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->where('category_id', $category->id)->paginate(10);
+
+            $discussions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->where('category_id', $category->id)->paginate(10);
 
         } else {
 
-            $disucssions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->paginate(10);
+            $discussions = DiscussionThread::with(['user', 'category', 'comments'])->where('status', 1)->paginate(10);
         }
 
         if ($request->query('s')) {
 
-            $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->where(['user_id' => $request->user()->id, 'status' => 1])->where('title', 'LIKE', '%' . $request->query('s') . '%')->paginate(10);
+            if ($request->user()->role_id == 1 || $request->user()->role_id == 2) {
+                $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->where('title', 'LIKE', '%' . $request->query('s') . '%')->paginate(10);
+            } else {
+                $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->where(['user_id' => $request->user()->id])->where('title', 'LIKE', '%' . $request->query('s') . '%')->paginate(10);
+            }
 
         } else {
 
-            $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->where(['user_id' => $request->user()->id, 'status' => 1])->paginate(10);
+            if ($request->user()->role_id == 1 || $request->user()->role_id == 2) {
+                $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->paginate(10);
+            } else {
+                $my_posts = DiscussionThread::with(['user', 'category', 'comments'])->where(['user_id' => $request->user()->id])->paginate(10);
+            }
+
         }
 
-        return view('discussion.index', compact('title', 'categories', 'disucssions', 'my_posts', 'most_reads', 'featureds'));
+        return view('discussion.index', compact('title', 'categories', 'discussions', 'my_posts', 'most_reads', 'featureds'));
 
     }
 
@@ -61,7 +71,10 @@ class DiscussionController extends Controller
 
         $title = "Create Discussion Thread";
         $categories = Category::get();
-        return view('discussion.create', compact('title', 'categories'));
+        $featureds = DiscussionThread::with(['user', 'category', 'comments'])->where(['status' => 1, 'featured' => 1])->take(3)->get();
+
+        $most_reads = DiscussionThread::with(['user', 'category', 'comments'])->where(['status' => 1, 'most_read' => 1])->take(3)->get();
+        return view('discussion.create', compact('title', 'categories', 'most_reads', 'featureds'));
 
     }
 
@@ -71,7 +84,10 @@ class DiscussionController extends Controller
         $title = "Edit Discussion Thread";
         $discussion = DiscussionThread::findOrFail($id);
         $categories = Category::get();
-        return view('discussion.edit', compact('title', 'discussion', 'categories'));
+        $featureds = DiscussionThread::with(['user', 'category', 'comments'])->where(['status' => 1, 'featured' => 1])->take(3)->get();
+
+        $most_reads = DiscussionThread::with(['user', 'category', 'comments'])->where(['status' => 1, 'most_read' => 1])->take(3)->get();
+        return view('discussion.edit', compact('title', 'discussion', 'categories', 'most_reads', 'featureds'));
 
     }
 

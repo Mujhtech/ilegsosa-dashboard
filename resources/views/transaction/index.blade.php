@@ -23,16 +23,16 @@
                                 @if ($transactions->count() > 0)
                                     @foreach ($transactions as $item)
                                         <tr>
-                                            <td>{{ $payment->payment_type->name }}</td>
-                                            <td>{{ $payment->user->full_name }}</td>
-                                            <td>{{ $payment->updated_at->diffForHumans() }}</td>
+                                            <td>{{ $item->payment_type->name }}</td>
+                                            <td>{{ $item->user->full_name }}</td>
+                                            <td>{{ $item->updated_at->diffForHumans() }}</td>
                                             <td>
-                                                <span class="badge badge-info">&#x20A6;{{ $payment->amount }}</span>
+                                                <span class="badge badge-info">&#x20A6;{{ $item->amount }}</span>
                                             </td>
                                             <td>
-                                                @if ($payment->payment_status == 1)
+                                                @if ($item->payment_status == 1)
                                                     <span class="badge badge-success">Confirmed</span>
-                                                @elseif($payment->payment_status == 2)
+                                                @elseif($item->payment_status == 2)
                                                     <span class="badge badge-success">Failed</span>
                                                 @else
                                                     <span class="badge badge-info">Pending</span>
@@ -47,33 +47,11 @@
                                 @endif
                             </table>
                         </div>
-                        <div class="float-right">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        @if ($transactions->count() > 0)
+                            <div class="float-right">
+                                {{ $transactions->links('vendor.pagination.default') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
