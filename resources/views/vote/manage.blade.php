@@ -60,8 +60,10 @@
                                             </td>
                                             <td>{{ $item->year }}</td>
                                             <td colspan="2">
-                                                <a href="{{ route('user.vote.declare', $item->id) }}"
-                                                    class="btn btn-primary btn-sm">Declare Winner</a>
+                                                @if (!\App\Models\Nomination::where(['designation_id' => $item->designation_id, 'year' => $item->year, 'win' => 1])->exists())
+                                                    <a href="{{ route('user.vote.declare', $item->id) }}"
+                                                        class="btn btn-primary btn-sm">Declare Winner</a>
+                                                @endif
                                                 <a href="{{ route('user.vote.destroy.nominate', $item->id) }}"
                                                     class="btn btn-danger btn-sm">Delete</a>
                                             </td>

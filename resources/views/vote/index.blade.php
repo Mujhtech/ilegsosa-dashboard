@@ -20,11 +20,11 @@
                                     @foreach ($item->nominations as $nominee)
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="candidate{{ $nominee->id }}"
-                                                name="{{ str_replace(' ', '_', strtolower($item->title)) }}" class="custom-control-input"
-                                                value="{{ $nominee->id }}">
+                                                name="{{ str_replace(' ', '_', strtolower($item->title)) }}"
+                                                class="custom-control-input" value="{{ $nominee->id }}">
                                             <label class="custom-control-label"
                                                 for="candidate{{ $nominee->id }}">{{ $nominee->user->full_name }} (
-                                                {{ $nominee->votes }} Votes )</label>
+                                                {{ $nominee->votes }} Votes ) @if ($nominee->win) Winner @endif</label>
                                         </div>
                                     @endforeach
 
