@@ -9,6 +9,7 @@ use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
@@ -73,6 +74,14 @@ Route::middleware(['auth', 'verify'])->name('user.')->group(function () {
     Route::post('/member/update', [MemberController::class, 'update'])->middleware('admin')->name('member.update');
 
     Route::post('/members/update', [MemberController::class, 'groupUpdate'])->middleware('admin')->name('member.group.update');
+
+    Route::get('/payment-type', [PaymentTypeController::class, 'index'])->middleware('admin')->name('payment.type');
+
+    Route::get('/payment-type/create', [PaymentTypeController::class, 'create'])->middleware('admin')->name('payment.type.create');
+
+    Route::post('/payment-type/update', [PaymentTypeController::class, 'update'])->middleware('admin')->name('payment.type.update');
+
+    Route::post('/payment-type/store', [PaymentTypeController::class, 'store'])->middleware('admin')->name('payment.type.store');
 
     Route::get('/pay-due', [PaymentController::class, 'index'])->name('due');
 

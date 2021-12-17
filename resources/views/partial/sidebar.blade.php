@@ -39,6 +39,13 @@
                 <a href="{{ route('user.due') }}" class="nav-link"><i class="fas fa-wallet"></i> <span>Pay
                         Due</span></a>
             </li>
+            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                <li class="nav-item dropdown mt-4 {{ Route::is('user.payment.type') ? 'active' : '' }}">
+                    <a href="{{ route('user.payment.type') }}" class="nav-link"><i class="fas fa-wallet"></i>
+                        <span>Payment Type
+                        </span></a>
+                </li>
+            @endif
             <li class="nav-item dropdown mt-4 {{ Route::is('user.transaction') ? 'active' : '' }}">
                 <a href="{{ route('user.transaction') }}" class="nav-link"><i class="fas fa-wallet"></i>
                     <span>Transactions</span></a>
