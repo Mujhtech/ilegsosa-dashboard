@@ -364,7 +364,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
-                                            <p>Hi there,</p>
+                                            <p>Hi {{ $name }},</p>
                                             <p>{{ $content }}</p>
                                         </td>
                                     </tr>
@@ -381,14 +381,13 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                                    <br> Don't like these emails? <a
-                                        href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                                    <span class="apple-link">Ilegrams Old Students' Association Secretariat, Canon J. A. Akinyemi Building, </span>
+                                    <br> Ilesa Grammar School, P.O.Box 16, Ilesa, Osun State, Nigeria
                                 </td>
                             </tr>
                             <tr>
                                 <td class="content-block powered-by">
-                                    Powered by <a href="http://htmlemail.io">HTMLemail</a>.
+                                    Powered by <a href="https://ilegsosa.org">ILGESOSA</a>.
                                 </td>
                             </tr>
                         </table>

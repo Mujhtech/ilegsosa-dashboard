@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetRequest;
 use App\Http\Requests\VerifyRequest;
+use App\Mail\SendMail;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
@@ -99,7 +100,9 @@ class AuthController extends Controller
         DB::table('password_resets')->where('email', $request->email)->delete();
         DB::table('password_resets')->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]);
         try {
-            //$this->email->email_type('reset_password')->reset_account($token)->send($request->email);
+
+            Mail::to($request->email)->send(new SendMail($user->full_name, 'It work'));
+
         } catch (Exception $e) {
 
         }
@@ -134,6 +137,14 @@ class AuthController extends Controller
 
             DB::table('password_resets')->where('email', $user->email)->delete();
 
+            try {
+
+                Mail::to($user()->email)->send(new SendMail($user()->full_name, 'Your password has been changed'));
+
+            } catch (Exception $e) {
+
+            }
+
             flash('Password recover successfully')->success();
             return redirect()->back()->with(['success' => 'Password recover successfully']);
 
@@ -161,6 +172,14 @@ class AuthController extends Controller
             'email_code' => $email_code,
             'expires_at' => Carbon::now()->addMinutes(60),
         ]);
+
+        try {
+
+            Mail::to($request->user()->email)->send(new SendMail($request->user()->full_name, 'Your verification code is ' . $email_code));
+
+        } catch (Exception $e) {
+
+        }
 
         flash('A mail has been sent to you')->success();
 
@@ -210,7 +229,7 @@ class AuthController extends Controller
 
             try {
 
-                //$this->email->email_type('welcome_user')->welcome_user($user->fullname)->send($user->email);
+                Mail::to($user()->email)->send(new SendMail($user()->full_name, 'Your account has been verified'));
 
             } catch (Exception $e) {
 
