@@ -12,6 +12,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Mail;
 use Str;
 
 class AuthController extends Controller
@@ -56,7 +57,7 @@ class AuthController extends Controller
         $user->first_name = $request->firstname;
         $user->last_name = $request->lastname;
         $user->email = $request->email;
-        $user->city = $request->address;
+        $user->city = $request->city;
         $user->phone = $request->phone_number;
         $user->year_of_graduation = $request->graduation;
         $user->year_of_matriculation = $request->matriculation;

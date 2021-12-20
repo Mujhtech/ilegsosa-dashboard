@@ -83,11 +83,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Present Location</label>
-                    <input id="address" type="text" class="form-control" name="address" tabindex="1"
-                        value="{{ old('address') }}" autofocus>
-                    @if ($errors->has('address'))
-                        <small>{!! $errors->get('address')[0] !!}</small>
+                    <label for="city">City</label>
+                    <input id="city" type="text" class="form-control" name="city" tabindex="1"
+                        value="{{ old('city') }}" autofocus>
+                    @if ($errors->has('city'))
+                        <small>{!! $errors->get('city')[0] !!}</small>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input id="country" type="text" class="form-control" name="country" tabindex="1"
+                        value="{{ old('country') }}" autofocus>
+                    @if ($errors->has('country'))
+                        <small>{!! $errors->get('country')[0] !!}</small>
                     @endif
                 </div>
 

@@ -31,7 +31,8 @@ class RegisterRequest extends FormRequest
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'username' => 'string',
-            'address' => 'string',
+            'city' => 'required|string',
+            'country' => 'required|string',
             'phone' => 'max:11',
         ];
     }
@@ -53,7 +54,10 @@ class RegisterRequest extends FormRequest
             'firstname.required' => 'Last name is required',
             'firstname.string' => 'Last name must be a character',
             'username.string' => 'User name must be a character',
-            'address.string' => 'Present Location must be a character',
+            'city.required' => 'City is required',
+            'city.string' => 'Present City must be a character',
+            'country.required' => 'Country is required',
+            'country.string' => 'Present Country must be a character',
             'phone.max' => 'Phone number must be 11 in digit',
         ];
     }

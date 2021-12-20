@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('year_of_matriculation')->nullable();
             $table->string('year_of_graduation')->nullable();
             $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->string('username')->nullable();
             $table->string('phone');
             $table->boolean('active')->default(false);
