@@ -7,6 +7,7 @@ use App\Http\Requests\MemberRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\SetMember;
 
 class MemberController extends Controller
 {

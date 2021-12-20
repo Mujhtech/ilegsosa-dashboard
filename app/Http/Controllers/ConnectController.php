@@ -17,9 +17,9 @@ class ConnectController extends Controller
 
         $data['title'] = "Connect with mates";
 
-        //dd($request->user()->member);
+        // dd($request->user()->member->status == 1);
 
-        if ($request->user()->member) {
+        if ($request->user()->member->status == 1) {
 
             $members = SetMember::where(['set_id' => $request->user()->set_id, 'status' => 1]);
 

@@ -123,7 +123,7 @@
                                             <td>
                                                 @if (\App\Models\SetMember::where('user_id', $item->id)->exists())
                                                     @if (\App\Models\SetMember::where('user_id', $item->id)->first()->status == 0)
-                                                        <a href="{{ route('user.member.grant.access', $id) }}"
+                                                        <a href="{{ route('user.member.grant.access', $item->id) }}"
                                                             class="btn btn-primary">Grant Access</a>
                                                     @else
                                                         Access granted
