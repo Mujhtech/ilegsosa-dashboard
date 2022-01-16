@@ -13,7 +13,7 @@ use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
-use App\Mail\SendMail;
+use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +31,7 @@ Route::get('/storage-link', function () {
 });
 
 Route::get('test-mail', function () {
-    Mail::to('mujhtech@gmail.com')->send(new SendMail('It work', 'Mujhtech'));
+    Mail::to('mujhtech@gmail.com')->send(new TestEmail('It work', 'Mujhtech'));
 });
 
 Route::get('/paystack/handle/callback', [PaymentController::class, 'handleCallback']);
