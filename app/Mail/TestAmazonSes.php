@@ -40,7 +40,7 @@ class TestAmazonSes extends Mailable
     {
         $to = Arr::get($this->to, '0.address');
 
-        return $this->from('app@ilegsosa.org', 'Ilesa Grammar School Alumnus')->view('email.template')->mailersend(
+        return $this->from('app@ilegsosa.org', 'Ilesa Grammar School Alumnus')->view('emails.template')->mailersend(
 
             null,
             [
