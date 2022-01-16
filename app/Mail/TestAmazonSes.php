@@ -13,16 +13,18 @@ class TestAmazonSes extends Mailable
 
 
     public $content;
+    public $name;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($content)
+    public function __construct($content, $name)
     {
         //
         $this->content = $content;
+        $this->name = $name;
     }
 
     /**
@@ -32,6 +34,6 @@ class TestAmazonSes extends Mailable
      */
     public function build()
     {
-        return $this->from('support@ilegsosa.org')->view('email.template');
+        return $this->from('app@ilegsosa.org')->view('email.template');
     }
 }
