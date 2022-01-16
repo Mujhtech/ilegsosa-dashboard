@@ -10,7 +10,7 @@ use MailerSend\Helpers\Builder\Variable;
 use MailerSend\Helpers\Builder\Personalization;
 use MailerSend\LaravelDriver\MailerSendTrait;
 
-class TestEmail extends Mailable
+class TestMailerEmail extends Mailable
 {
     use Queueable, SerializesModels, MailerSendTrait;
 
@@ -20,7 +20,6 @@ class TestEmail extends Mailable
 
         return $this->view('emails.test_html')
             ->text('emails.test_text')
-            ->attachFromStorageDisk('public', 'example.png')
             ->mailersend(
                 // Template ID
                 null,
