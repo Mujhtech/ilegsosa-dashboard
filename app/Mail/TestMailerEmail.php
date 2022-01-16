@@ -14,6 +14,20 @@ class TestMailerEmail extends Mailable
 {
     use Queueable, SerializesModels, MailerSendTrait;
 
+    public $content;
+    public $name;
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($name, $content)
+    {
+        //
+        $this->name = $name;
+        $this->content = $content;
+    }
+
     public function build()
     {
         $to = Arr::get($this->to, '0.address');
