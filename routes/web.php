@@ -15,7 +15,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
 use App\Mail\TestAmazonSes;
 use Illuminate\Support\Facades\Route;
-use Mail;
 
 /*
 |--------------------------------------------------------------------------
