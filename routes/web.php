@@ -13,7 +13,7 @@ use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
-use App\Mail\TestMailerEmail;
+use App\Mail\TestAmazonSes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +31,7 @@ Route::get('/storage-link', function () {
 });
 
 Route::get('test-mail', function () {
-    Mail::to('support@ilegsosa.org')->send(new TestMailerEmail('It work', 'Mujhtech'));
+    Mail::to('support@ilegsosa.org')->send(new TestAmazonSes('It work', 'Mujhtech'));
 });
 
 Route::get('/paystack/handle/callback', [PaymentController::class, 'handleCallback']);
