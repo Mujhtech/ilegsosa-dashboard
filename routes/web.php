@@ -31,7 +31,7 @@ Route::get('/storage-link', function () {
 });
 
 Route::get('test-mail', function () {
-    Mail::to('mujhtech@gmail.com')->send(new TestMailerEmail('It work', 'Mujhtech'));
+    Mail::to('support@ilegsosa.org')->send(new TestMailerEmail('It work', 'Mujhtech'));
 });
 
 Route::get('/paystack/handle/callback', [PaymentController::class, 'handleCallback']);
