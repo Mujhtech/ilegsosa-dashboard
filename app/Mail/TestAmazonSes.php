@@ -44,7 +44,7 @@ class TestAmazonSes extends Mailable
 
             null,
             [
-                Variable($to, ['name' => $this->name, 'content' => $this->content]),
+                new Variable($to, ['name' => $this->name, 'content' => $this->content]),
             ],
             ['tag']);
     }
