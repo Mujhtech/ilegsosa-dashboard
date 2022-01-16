@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'ses'),
+    'default' => env('MAIL_MAILER', 'mailersend'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,6 +47,10 @@ return [
 
         'ses' => [
             'transport' => 'ses',
+        ],
+
+        'mailersend' => [
+            'transport' => 'mailersend',
         ],
 
         'mailgun' => [
