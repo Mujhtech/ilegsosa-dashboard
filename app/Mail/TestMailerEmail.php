@@ -43,24 +43,6 @@ class TestMailerEmail extends Mailable
                 ],
                 // Tags
                 ['tag'],
-                // Advanced personalization
-                [
-                    new Personalization($to, [
-                        'var' => 'variable',
-                        'number' => 123,
-                        'object' => [
-                            'key' => 'object-value'
-                        ],
-                        'objectCollection' => [
-                            [
-                                'name' => 'John'
-                            ],
-                            [
-                                'name' => 'Patrick'
-                            ]
-                        ],
-                    ])
-                ]
             );
     }
 }
