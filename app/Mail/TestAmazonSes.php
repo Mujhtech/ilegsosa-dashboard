@@ -34,6 +34,6 @@ class TestAmazonSes extends Mailable
      */
     public function build()
     {
-        return $this->from('app@ilegsosa.org')->view('email.template');
+        return $this->from('app@ilegsosa.org', 'Ilesa Grammar School Alumnus')->view('email.template');
     }
 }
