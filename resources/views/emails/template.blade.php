@@ -348,12 +348,23 @@
 </head>
 
 <body class="">
-    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+    <span class="preheader">Hi {{ $name }}, {{ $content }}</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
             <td>&nbsp;</td>
             <td class="container">
                 <div class="content">
+
+                    <div class="header">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="content-block">
+                                    <a href="https://ilegsosa.org"><img src="{{ get_site_logo() }}" alt="{{ get_setting('site_title') }} Logo"
+                                        style="width: 200px;" class="mt-3"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
                     <!-- START CENTERED WHITE CONTAINER -->
                     <table role="presentation" class="main">
@@ -381,13 +392,14 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">Ilegrams Old Students' Association Secretariat, Canon J. A. Akinyemi Building, </span>
+                                    <span class="apple-link">Ilegrams Old Students' Association Secretariat, Canon
+                                        J. A. Akinyemi Building, </span>
                                     <br> Ilesa Grammar School, P.O.Box 16, Ilesa, Osun State, Nigeria
                                 </td>
                             </tr>
                             <tr>
                                 <td class="content-block powered-by">
-                                    Powered by <a href="https://ilegsosa.org">ILGESOSA</a>.
+                                    Powered by <a href="https://ilegsosa.org">ILGESOSA</a> {{ date('Y') }}.
                                 </td>
                             </tr>
                         </table>
