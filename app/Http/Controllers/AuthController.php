@@ -231,7 +231,7 @@ class AuthController extends Controller
 
             try {
 
-                Mail::to($user()->email)->send(new SendMail('Account Verified', $user()->full_name, 'Your account has been verified'));
+                Mail::to($user->email)->send(new SendMail('Account Verified', $user->full_name, 'Your account has been verified'));
 
             } catch (Exception $e) {
 
