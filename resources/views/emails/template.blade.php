@@ -355,17 +355,6 @@
             <td class="container">
                 <div class="content">
 
-                    <div class="header">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="content-block">
-                                    <a href="https://ilegsosa.org"><img src="{{ get_site_logo() }}" alt="{{ get_setting('site_title') }} Logo"
-                                        style="width: 200px;" class="mt-3"></a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
                     <!-- START CENTERED WHITE CONTAINER -->
                     <table role="presentation" class="main">
 
