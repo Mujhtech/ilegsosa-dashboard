@@ -102,7 +102,7 @@ class AuthController extends Controller
         DB::table('password_resets')->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]);
         try {
 
-            Mail::to($request->email)->send(new SendMail($user->full_name, 'It work'));
+            Mail::to($request->email)->send(new SendMail('Password Reset', $user->full_name, 'It work'));
 
         } catch (Exception $e) {
 
@@ -140,7 +140,7 @@ class AuthController extends Controller
 
             try {
 
-                Mail::to($user()->email)->send(new SendMail($user()->full_name, 'Your password has been changed'));
+                Mail::to($user()->email)->send(new SendMail('Password Recovered', $user()->full_name, 'Your password has been changed'));
 
             } catch (Exception $e) {
 
@@ -176,7 +176,7 @@ class AuthController extends Controller
 
         try {
 
-            Mail::to($request->user()->email)->send(new SendMail($request->user()->full_name, 'Your verification code is ' . $email_code));
+            Mail::to($request->user()->email)->send(new SendMail('Verify Account', $request->user()->full_name, 'Your verification code is ' . $email_code));
 
         } catch (Exception $e) {
 
@@ -230,7 +230,7 @@ class AuthController extends Controller
 
             try {
 
-                Mail::to($user()->email)->send(new SendMail($user()->full_name, 'Your account has been verified'));
+                Mail::to($user()->email)->send(new SendMail('Account Verified', $user()->full_name, 'Your account has been verified'));
 
             } catch (Exception $e) {
 

@@ -13,14 +13,16 @@ class SendMail extends Mailable
 
     public $content;
     public $name;
+    public $subject;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $content)
+    public function __construct($subject, $name, $content)
     {
         //
+        $this->subject = $subject;
         $this->name = $name;
         $this->content = $content;
     }
@@ -32,6 +34,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('app@ilegsosa.org', 'Ilesa Grammar School Alumnus')->view('emails.template');
+        return $this->from('support@ilegsosa.org', 'Ilesa Grammar School Alumnus')->subject($this->subject)->view('emails.template');
     }
 }
