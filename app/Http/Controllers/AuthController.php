@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetRequest;
 use App\Http\Requests\VerifyRequest;
 use App\Mail\SendMail;
+use App\Models\EmailVerifier;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
