@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="city">City</label>
+                    <label for="city">Current City</label>
                     <input id="city" type="text" class="form-control" name="city" tabindex="1"
                         value="{{ old('city') }}" autofocus>
                     @if ($errors->has('city'))
