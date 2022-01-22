@@ -14,7 +14,7 @@
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                     @if ($errors->has('email'))
-                        <small>{!! $errors->get('email')[0] !!}</small>
+                        <small style="color: red">{!! $errors->get('email')[0] !!}</small>
                     @endif
                 </div>
 
@@ -24,7 +24,7 @@
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     @if ($errors->has('password'))
-                        <small>{!! $errors->get('password')[0] !!}</small>
+                        <small style="color: red">{!! $errors->get('password')[0] !!}</small>
                     @endif
                     <p style="text-align: right"><a href="{{ route('auth.forgot') }}">Forgot Password</a>
                     </p>
