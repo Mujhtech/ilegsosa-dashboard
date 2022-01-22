@@ -10,14 +10,14 @@
         <div class="card-body">
             <form method="POST" action="{{ route('auth.register.request') }}" class="needs-validation" novalidate="">
                 @csrf
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="username">User Name</label>
                     <input id="username" type="text" class="form-control" name="username" tabindex="1"
                         value="{{ old('username') }}" required autofocus>
                     @if ($errors->has('username'))
                         <small>{!! $errors->get('username')[0] !!}</small>
                     @endif
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="firstname">First Name</label>
                     <input id="firstname" type="text" class="form-control" name="firstname"

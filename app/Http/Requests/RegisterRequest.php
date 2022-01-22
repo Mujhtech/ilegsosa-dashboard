@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-            'username' => 'string',
+            //'username' => 'string',
             'city' => 'required|string',
             'country' => 'required|string',
         ];
@@ -52,7 +52,7 @@ class RegisterRequest extends FormRequest
             'lastname.string' => 'Last name must be a character',
             'firstname.required' => 'Last name is required',
             'firstname.string' => 'Last name must be a character',
-            'username.string' => 'User name must be a character',
+            //'username.string' => 'User name must be a character',
             'city.required' => 'City is required',
             'city.string' => 'Present City must be a character',
             'country.required' => 'Country is required',

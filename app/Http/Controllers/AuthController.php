@@ -62,7 +62,7 @@ class AuthController extends Controller
         $user->phone = $request->phone_number;
         $user->year_of_graduation = $request->graduation;
         $user->year_of_matriculation = $request->matriculation;
-        $user->username = $request->username;
+        //$user->username = $request->username;
         $user->set_id = 1;
         $user->role_id = 1;
         $user->password = $request->password;
